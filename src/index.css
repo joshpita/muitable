@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.MuiDataGrid-footerContainer.css-17jjc08-MuiDataGrid-footerContainer{
+  display: none;
+}
+
+svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeSmall.css-ptiqhd-MuiSvgIcon-root {
+  display: none;
+}
+
+.MuiDataGrid-cell.MuiDataGrid-cell--textLeft{
+  color: #40C4FF;
+}
+
+h6 {
+  padding-top: 30px;
+}

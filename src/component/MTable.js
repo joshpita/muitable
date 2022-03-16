@@ -1,10 +1,9 @@
 import React from 'react'
 import {
-    DataGrid, GridRowsProp, GridColDef, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarExport, GridSelectionModel,
+    DataGrid, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarExport
 } from '@mui/x-data-grid';
-
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
-import { styled } from '@mui/material/styles';
+import ProgressBar from './ProgressBar';
+import ProgressBarDemo from './ProgressBarDemo';
 
 function CustomToolbar() {
     return (
@@ -15,76 +14,80 @@ function CustomToolbar() {
         </GridToolbarContainer>
     )
 }
-
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-    height: 3,
-    borderRadius: 5,
-    [`&.${linearProgressClasses.colorPrimary}`]: {
-        backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
-    },
-    [`& .${linearProgressClasses.bar}`]: {
-        borderRadius: 5,
-        backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
-    },
-}));
-
 const rows = [
-    { id: 1, col1: '77', col2: 'The Building Of Tom', col3: '$600', col4: '$00.00', col5: '000', col6: '000', col7: '2021-06-22' },
-    { id: 2, col1: '13', col2: 'Test Project- 550 w', col3: '$600', col4: '$00.00', col5: '000', col6: '000', col7: '2021-02-02' },
-    { id: 3, col1: '4', col2: '450 Lincoln Ave', col3: '$600', col4: '$00.00', col5: '000', col6: '000', col7: '2021-08-12' },
+    { id: 77, col1: 'The Building Of Tom', col2: '$600', col3: '$00.00', col4: '000', col5: '000', col6: '2021-06-22' },
+    { id: 13, col1: 'Test Project- 550 w', col2: '$600', col3: '$00.00', col4: '000', col5: '000', col6: '2021-02-02' },
+    { id: 4, col1: '450 Lincoln Ave', col2: '$600', col3: '$00.00', col4: '000', col5: '000', col6: '2021-08-12' },
 ];
 
+const divStyle = {
+    color: '#40C4FF',
+}
+
+// style={divStyle}
+
 const columns = [
-    { field: 'id', headerName: 'Project #', width: 100 },
     {
-        field: 'col2',
+        field: 'id',
+        headerName: 'Project #',
+        width: 100,
+    },
+    {
+        field: 'col1',
         headerName: 'Name & Client',
         width: 148,
         editable: false,
     },
     {
-        field: 'col3',
+        field: 'col2',
         headerName: 'PAID',
-        width: 150,
+        width: 110,
         editable: false,
+        renderCell: (params) => (
+            <>
+                {/* <ProgressBar></ProgressBar> */}
+                <ProgressBarDemo></ProgressBarDemo>
+                <h6>{params.row.col3}</h6>
+            </>
+        ),
     },
     {
-        field: 'col4',
+        field: 'col3',
         headerName: 'Balance',
         type: 'number',
         width: 110,
         editable: false,
     },
     {
-        field: 'col5',
+        field: 'col4',
         headerName: 'TIX',
         type: 'number',
         width: 110,
         editable: false,
     },
     {
-        field: 'col6',
+        field: 'col5',
         headerName: 'COs',
         type: 'number',
-        width: 110,
+        width: 160,
         editable: false,
     },
     {
-        field: 'col7',
+        field: 'col6',
         headerName: 'Start',
+        width: 180,
+        editable: false,
     },
 ];
 
 export const MTable = () => {
     return (
-        <div style={{ height: 300, width: '100%' }}>
-            <DataGrid
-                rows={rows}
-                columns={columns}
-                checkboxSelection
-                disableSelectionOnClick
-                components={{ Toolbar: CustomToolbar }}
-            />
-        </div>
+        <DataGrid
+            rows={rows}
+            columns={columns}
+            checkboxSelection
+            disableSelectionOnClick
+            components={{ Toolbar: CustomToolbar }}
+        />
     );
 }
